@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "301420763380",
+    "project_id": "maangengineer",
+    "storage_bucket": "maangengineer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301420763380:android:686cfc204a2a603ef266a1",
+        "android_client_info": {
+          "package_name": "com.aditythakur.maangengineer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301420763380-u0lk7ph87h1a14c20hs1uu7iou5djrea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKC6Sq52Uwag3PY1-M73xAG8Pydi3Sw30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301420763380-u0lk7ph87h1a14c20hs1uu7iou5djrea.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
