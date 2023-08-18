@@ -1,5 +1,7 @@
-import 'dart:math';
 
+import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:maangengineer/screens/dsa/dsa_questions_list.dart';
@@ -13,6 +15,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int indexOfQues = 0;
+  final logicInputController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    logicInputController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.95,
-            child: const TextField(
+            child:  TextField(
+              controller: logicInputController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Start typing your approach here:',
@@ -97,7 +108,28 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             height: 20,
           ),
-          ElevatedButton(onPressed: () {}, child: const Text("Submit"))
+          ElevatedButton(
+
+              onPressed: () async {
+                final user = FirebaseAuth.instance.currentUser;
+                
+                var ref = await FirebaseFirestore.instance
+                    .collection("users").doc(user!.uid ).collection("chats")
+                    .add({
+                  "prompt": "You are a tech interviewer talking to candidate about a problem ${DSAQuestionsList[indexOfQues].ques} and they answer their approach to solving as ${logicInputController.text}. Without any other default text provide a clear reason how their approach is good or how it can be improved."
+                });
+
+
+
+                CollectionReference responses = await FirebaseFirestore.instance.collection('users').doc(user!.uid ).collection("chats");
+                var documentSnapshot = await responses.doc(ref.id).get();
+
+
+
+
+              },
+              child: const Text("Submit")),
+
         ],
       ),
       floatingActionButton: FloatingActionButton(
