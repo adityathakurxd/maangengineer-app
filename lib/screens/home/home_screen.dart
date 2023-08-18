@@ -23,7 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
               fontSize: 40, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Column(
+      body: Wrap(
+        alignment: WrapAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -32,23 +33,25 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: const BoxDecoration(color: Colors.white),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                        child: Text(
-                      DSAQuestionsList[indexOfQues].title,
-                      style: GoogleFonts.darkerGrotesque(
-                          fontSize: 25, fontWeight: FontWeight.bold),
-                    )),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      DSAQuestionsList[indexOfQues].story,
-                      style: GoogleFonts.instrumentSans(fontSize: 20),
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                          child: Text(
+                        DSAQuestionsList[indexOfQues].title,
+                        style: GoogleFonts.darkerGrotesque(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      )),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        DSAQuestionsList[indexOfQues].story,
+                        style: GoogleFonts.instrumentSans(fontSize: 20),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -91,6 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(onPressed: () {}, child: const Text("Submit"))
         ],
       ),
       floatingActionButton: FloatingActionButton(
