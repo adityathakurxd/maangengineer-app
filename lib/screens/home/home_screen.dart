@@ -1,4 +1,3 @@
-
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,12 +16,15 @@ class _HomeScreenState extends State<HomeScreen> {
   int indexOfQues = 0;
   final logicInputController = TextEditingController();
 
+  bool isLoadingResponse = false;
+
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     logicInputController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,9 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.95,
-            child:  TextField(
+            child: TextField(
               controller: logicInputController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Start typing your approach here:',
               ),
@@ -109,27 +111,65 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 20,
           ),
           ElevatedButton(
-
               onPressed: () async {
-                final user = FirebaseAuth.instance.currentUser;
-                
-                var ref = await FirebaseFirestore.instance
-                    .collection("users").doc(user!.uid ).collection("chats")
-                    .add({
-                  "prompt": "You are a tech interviewer talking to candidate about a problem ${DSAQuestionsList[indexOfQues].ques} and they answer their approach to solving as ${logicInputController.text}. Without any other default text provide a clear reason how their approach is good or how it can be improved."
+                setState(() {
+                  isLoadingResponse = true;
                 });
+                final user = FirebaseAuth.instance.currentUser;
 
+                var ref = await FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(user!.uid)
+                    .collection("chats")
+                    .add({
+                  "prompt":
+                      "You are a tech interviewer talking to candidate about a problem ${DSAQuestionsList[indexOfQues].ques} and they answer their approach to solving as ${logicInputController.text}. Without any other default text provide a clear reason how their approach is good or how it can be improved."
+                });
+                // CollectionReference responsesCollectionReference = FirebaseFirestore.instance.collection('users').doc(userUID).collection("chats");
+                final docRef = FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(user.uid)
+                    .collection("chats")
+                    .doc(ref.id);
 
+                print("REF ID HEREEEEEE");
+                print(ref.id);
 
-                CollectionReference responses = await FirebaseFirestore.instance.collection('users').doc(user!.uid ).collection("chats");
-                var documentSnapshot = await responses.doc(ref.id).get();
+                Future.delayed(const Duration(seconds: 10), () {
+                  docRef.get().then(
+                    (DocumentSnapshot doc) {
+                      final data = doc.data() as Map<String, dynamic>;
+                      print(data);
+                      print(data['response']);
 
-
-
-
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('About your approach'),
+                          content: Text(data['response']),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    onError: (e) => print("Error getting document: $e"),
+                  );
+                });
+                setState(() {
+                  isLoadingResponse = false;
+                });
               },
-              child: const Text("Submit")),
-
+              child: isLoadingResponse
+                  ? const CircularProgressIndicator()
+                  : const Text("Submit")),
         ],
       ),
       floatingActionButton: FloatingActionButton(
