@@ -35,8 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
               fontSize: 40, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Wrap(
-        alignment: WrapAlignment.center,
+      body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -97,79 +96,86 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.95,
-            child: TextField(
-              controller: logicInputController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Start typing your approach here:',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.95,
+              child: TextField(
+                controller: logicInputController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Start typing your approach here...',
+                ),
               ),
             ),
           ),
           const SizedBox(
             height: 20,
           ),
-          ElevatedButton(
-              onPressed: () async {
-                setState(() {
-                  isLoadingResponse = true;
-                });
-                final user = FirebaseAuth.instance.currentUser;
+          Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: ElevatedButton(
+                onPressed: () async {
+                  setState(() {
+                    isLoadingResponse = true;
+                  });
+                  final user = FirebaseAuth.instance.currentUser;
 
-                var ref = await FirebaseFirestore.instance
-                    .collection("users")
-                    .doc(user!.uid)
-                    .collection("chats")
-                    .add({
-                  "prompt":
-                      "You are a tech interviewer talking to candidate about a problem ${DSAQuestionsList[indexOfQues].ques} and they answer their approach to solving as ${logicInputController.text}. Without any other default text provide a clear reason how their approach is good or how it can be improved."
-                });
-                // CollectionReference responsesCollectionReference = FirebaseFirestore.instance.collection('users').doc(userUID).collection("chats");
-                final docRef = FirebaseFirestore.instance
-                    .collection("users")
-                    .doc(user.uid)
-                    .collection("chats")
-                    .doc(ref.id);
+                  var ref = await FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(user!.uid)
+                      .collection("chats")
+                      .add({
+                    "prompt":
+                        "You are a tech interviewer talking to candidate about a problem ${DSAQuestionsList[indexOfQues].ques} and they answer their approach to solving as ${logicInputController.text}. Without any other default text provide a clear reason how their approach is good or how it can be improved."
+                  });
+                  // CollectionReference responsesCollectionReference = FirebaseFirestore.instance.collection('users').doc(userUID).collection("chats");
+                  final docRef = FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(user.uid)
+                      .collection("chats")
+                      .doc(ref.id);
 
-                print("REF ID HEREEEEEE");
-                print(ref.id);
+                  print("REF ID HEREEEEEE");
+                  print(ref.id);
 
-                Future.delayed(const Duration(seconds: 10), () {
-                  docRef.get().then(
-                    (DocumentSnapshot doc) {
-                      final data = doc.data() as Map<String, dynamic>;
-                      print(data);
-                      print(data['response']);
+                  Future.delayed(const Duration(seconds: 10), () {
+                    docRef.get().then(
+                      (DocumentSnapshot doc) {
+                        final data = doc.data() as Map<String, dynamic>;
+                        print(data);
+                        print(data['response']);
 
-                      showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text('About your approach'),
-                          content: Text(data['response']),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'Cancel'),
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    onError: (e) => print("Error getting document: $e"),
-                  );
-                });
-                setState(() {
-                  isLoadingResponse = false;
-                });
-              },
-              child: isLoadingResponse
-                  ? const CircularProgressIndicator()
-                  : const Text("Submit")),
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('About your approach'),
+                            content: Text(data['response']),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(context, 'Cancel'),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      onError: (e) => print("Error getting document: $e"),
+                    );
+                  });
+                  setState(() {
+                    isLoadingResponse = false;
+                  });
+                },
+                child: isLoadingResponse
+                    ? const CircularProgressIndicator()
+                    : const Text("Submit")),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
