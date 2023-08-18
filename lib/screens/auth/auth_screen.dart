@@ -1,87 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:maangengineer/screens/auth/app_info.dart';
 import 'package:maangengineer/screens/welcome_user.dart';
 import 'package:maangengineer/services/firebase_auth.dart';
 
-class AuthScreen extends StatefulWidget {
+class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 
   @override
-  State<AuthScreen> createState() => _AuthScreenState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        padding: const EdgeInsets.all(50),
+        child: MediaQuery.of(context).size.width < 600
+            ? const Column(children: [
+                AppInfo(),
+                SizedBox(
+                  height: 40,
+                ),
+                GoogleSignInButton()
+              ])
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    height: 600,
+                    child: const AppInfo(),
+                  ),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: const GoogleSignInButton())
+                ],
+              ),
+      ),
+    );
+  }
 }
 
-class _AuthScreenState extends State<AuthScreen> {
+class GoogleSignInButton extends StatefulWidget {
+  const GoogleSignInButton({super.key});
+
+  @override
+  State<GoogleSignInButton> createState() => _GoogleSignInButtonState();
+}
+
+class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   FirebaseAuthService authService = FirebaseAuthService();
   bool isClicked = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-            padding: const EdgeInsets.all(50),
-            // decoration: BoxDecoration(
-            //   gradient: LinearGradient(
-            //       begin: Alignment.topCenter,
-            //       end: Alignment.bottomCenter,
-            //       colors: [kPrimaryRed, kPrimaryBlue]),
-            // ),
-            child: Column(children: [
-              const Spacer(),
-              const Text(
-                'SRM One',
-                style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                    fontSize: 40.0),
-              ),
-              const Spacer(),
-              TextButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                    )),
-                onPressed: () async {
-                  isClicked = true;
-                  setState(() {});
-                  var user = await authService.signInWithGoogle();
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WelcomeUser(
-                        userData: user,
-                      ),
-                    ),
-                  );
-                },
-                // color: isUserSignedIn ? Colors.green : Colors.blueAccent,
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                          height: 26,
-                          width: 26,
-                          child: Image.asset("assets/images/google.png")),
-                      const SizedBox(width: 10),
-                      Text(
-                        // isUserSignedIn ? 'You\'re logged in with Google' :
-                        isClicked ? 'Signing you in..' : 'Login with Google',
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-            ])));
+    return TextButton(
+      style: TextButton.styleFrom(maximumSize: const Size.fromHeight(40)
+          // backgroundColor:
+          //     MaterialStateProperty.all(Colors.white),
+          // shape: MaterialStateProperty.all(
+          //   RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.circular(40),
+          //   ),
+          // )
+          ),
+      onPressed: () async {
+        isClicked = true;
+        setState(() {});
+        var user = await authService.signInWithGoogle();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WelcomeUser(
+              userData: user,
+            ),
+          ),
+        );
+      },
+      // color: isUserSignedIn ? Colors.green : Colors.blueAccent,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          // SizedBox(
+          //     height: 26,
+          //     width: 26,
+          //     child: Image.asset(
+          //         "assets/images/google.png")),
+
+          Text(
+            // isUserSignedIn ? 'You\'re logged in with Google' :
+            isClicked ? 'Signing you in..' : 'Get started with Google',
+            style: GoogleFonts.instrumentSans(
+                color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
   }
 }
