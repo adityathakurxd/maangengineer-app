@@ -2,9 +2,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:maangengineer/firebase_options.dart';
 import 'package:maangengineer/rootwidget.dart';
-import 'package:maangengineer/screens/home/home_screen.dart';
+
+// final _router = GoRouter(
+//   routes: [
+//     GoRoute(
+//       path: '/',
+//       builder: (context, state) => const RootWidget(),
+//     ),
+//   ],
+// );
 
 void main() async {
+  // usePath
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -19,10 +28,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // routerConfig: _router,
       debugShowCheckedModeBanner: false,
       title: 'MAANG Engineer',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
       home: const RootWidget(),

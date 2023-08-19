@@ -36,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: ListView(
+        shrinkWrap: true,
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -44,25 +45,23 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: const BoxDecoration(color: Colors.white),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                          child: Text(
-                        DSAQuestionsList[indexOfQues].title,
-                        style: GoogleFonts.darkerGrotesque(
-                            fontSize: 25, fontWeight: FontWeight.bold),
-                      )),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        DSAQuestionsList[indexOfQues].story,
-                        style: GoogleFonts.instrumentSans(fontSize: 20),
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                        child: Text(
+                      DSAQuestionsList[indexOfQues].title,
+                      style: GoogleFonts.darkerGrotesque(
+                          fontSize: 25, fontWeight: FontWeight.bold),
+                    )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      DSAQuestionsList[indexOfQues].story,
+                      style: GoogleFonts.instrumentSans(fontSize: 20),
+                    ),
+                  ],
                 ),
               ),
             ),
