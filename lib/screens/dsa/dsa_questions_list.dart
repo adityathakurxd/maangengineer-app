@@ -41,4 +41,84 @@ List<DSAQues> DSAQuestionsList = [
         "As a CloudLinx engineer, your task is to manage server allocation effectively using priority queues. How would you implement a system to prioritize tasks and allocate servers based on their urgency and resource availability?",
     tags: [],
   ),
+  DSAQues(
+    title: 'User Authentication at SecureNet',
+    story:
+        "You're part of SecureNet's engineering team, tasked with enhancing user authentication. To prevent unauthorized access, you need a secure way to validate users' credentials. How can you utilize hashing techniques to efficiently store and verify user passwords?",
+    ques:
+        "As an engineer at SecureNet, you need to ensure secure user authentication using hashing. How would you design a system to store passwords securely and validate user login attempts?",
+    tags: [],
+  ),
+  DSAQues(
+    title: 'Route Optimization at NavGlobe',
+    story:
+        "You've joined NavGlobe, a navigation and mapping service. Your role involves optimizing the route suggestions for users to minimize travel time. How can you apply graph algorithms to find the shortest path between two locations while considering traffic conditions?",
+    ques:
+        "At NavGlobe, your task is to provide users with optimal routes. How would you implement a graph algorithm to find the shortest path between two locations while factoring in real-time traffic data?",
+    tags: [],
+  ),
+  DSAQues(
+    title: 'Auto-Completion at TypeEase',
+    story:
+        "TypeEase, a smart typing assistant, wants to provide real-time word suggestions to users as they type. How can you use a trie to efficiently store and retrieve words to enhance the typing experience?",
+    ques:
+        "As a TypeEase engineer, you're responsible for auto-completion suggestions. How would you implement a trie-based system to provide accurate word suggestions while users type?",
+    tags: [],
+  ),
+  DSAQues(
+    title: 'Social Circles at ConnectYou',
+    story:
+        "You're working at ConnectYou, a social platform, aiming to group users into distinct social circles. How can you employ the disjoint set union (union-find) data structure to efficiently manage and merge social circles?",
+    ques:
+        "At ConnectYou, your goal is to connect users into social circles. How would you implement a disjoint set union algorithm to manage and merge these circles effectively?",
+    tags: [],
+  ),
+  DSAQues(
+    title: 'Stock Price Analysis at TradeX',
+    story:
+        "TradeX, a stock trading platform, wants to provide historical stock price analysis. How can you utilize segment trees to efficiently query and analyze stock price trends over specific time periods?",
+    ques:
+        "As a TradeX engineer, you need to enable efficient stock price analysis. How would you design a segment tree-based system to query and analyze stock prices within specific time intervals?",
+    tags: [],
+  ),
+  DSAQues(
+    title: 'E-commerce Inventory Management at SaleHub',
+    story:
+        "You've joined SaleHub, an e-commerce giant. Your task is to improve the inventory management system by sorting products based on various attributes. How can you implement different sorting algorithms to optimize product listings for customers?",
+    ques:
+        "At SaleHub, you're responsible for sorting products for optimal customer experience. How would you apply different sorting algorithms to organize products based on attributes like price and popularity?",
+    tags: [],
+  ),
+  DSAQues(
+    title: 'Enhanced Search Engine at SearchPlus',
+    story:
+        "SearchPlus aims to provide lightning-fast search results. As an engineer, you need to implement an efficient search algorithm that returns relevant results swiftly. How can you utilize searching algorithms to achieve this goal?",
+    ques:
+        "At SearchPlus, your mission is to deliver rapid and relevant search results. How would you implement a searching algorithm that quickly retrieves the most relevant results for user queries?",
+    tags: [],
+  ),
+  DSAQues(
+    title: 'Language Translation at LinguaTech',
+    story:
+        "You're at LinguaTech, working on a language translation service. To translate long texts, you need to break down the task into smaller parts for efficient processing. How can you use the divide and conquer approach to translate texts accurately and swiftly?",
+    ques:
+        "At LinguaTech, your task is to implement efficient language translation. How would you employ the divide and conquer strategy to break down and translate long texts?",
+    tags: [],
+  ),
+  DSAQues(
+    title: 'Data Compression at ByteSqueeze',
+    story:
+        "ByteSqueeze wants to compress large files to save storage space. As an engineer, you need to devise a compression algorithm that maximizes storage savings without compromising data integrity. How can you use a greedy algorithm to achieve this balance?",
+    ques:
+        "At ByteSqueeze, your goal is to develop a data compression algorithm. How would you apply a greedy algorithm to compress files while ensuring efficient storage utilization?",
+    tags: [],
+  ),
+  DSAQues(
+    title: 'Game Strategy at GameGenius',
+    story:
+        "GameGenius wants to develop an AI-driven chess player that can analyze different moves and choose the best ones. How can you use dynamic programming to calculate the optimal game strategy while considering multiple future moves?",
+    ques:
+        "As a GameGenius engineer, you're tasked with creating a strong chess AI. How would you apply dynamic programming to calculate and choose optimal moves for the AI player?",
+    tags: [],
+  ),
 ];

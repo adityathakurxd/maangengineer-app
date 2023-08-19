@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         tooltip: "Try another problem",
         onPressed: () {
-          indexOfQues = Random().nextInt(5);
+          indexOfQues = Random().nextInt(15);
           print(indexOfQues);
           setState(() {});
         },
