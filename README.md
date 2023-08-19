@@ -1,4 +1,4 @@
-# MAANG Enginner
+# MAANG Engineer
 
 Built for the Firebase Builders'23 Campaign by @invertaseio
 A Flutter web application that helps you practice programming questions!
