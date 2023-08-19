@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:maangengineer/screens/dsa/dsa_questions_list.dart';
 import 'package:maangengineer/screens/home/widgets/story_widget.dart';
+import 'package:maangengineer/screens/learn/learn_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,6 +31,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const LearnScreen()));
+              },
+              child: Text(
+                "Learn",
+                style: GoogleFonts.instrumentSans(fontSize: 20),
+              )),
+          const SizedBox(
+            width: 8,
+          )
+        ],
         title: Text(
           "MAANG Engineer",
           style: GoogleFonts.darkerGrotesque(
@@ -62,6 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(40.0),
             child: ElevatedButton(
                 onPressed: () async {
+                  const snackBar = SnackBar(
+                    content: Text(
+                        'Sharing feedback! Response might take upto 10s. Please wait...'),
+                  );
+
+// Find the ScaffoldMessenger in the widget tree
+// and use it to show a SnackBar.
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   setState(() {
                     isLoadingResponse = true;
                   });
@@ -81,8 +104,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       .doc(user.uid)
                       .collection("chats")
                       .doc(ref.id);
-
-                  print("REF ID HEREEEEEE");
                   print(ref.id);
 
                   Future.delayed(const Duration(seconds: 10), () {
