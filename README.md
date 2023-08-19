@@ -1,16 +1,15 @@
-# maangengineer
+# MAANG Enginner
 
-A new Flutter project.
+Built for the Firebase Builders'23 Campaign by @invertaseio
+A Flutter web application that helps you practice programming questions!
 
-## Getting Started
+👟 Step into the shoes of a tech engineer.
+(AI provides you feedback + suggestions on your approach to solving a real-world challenge)
+🚀 Learn data structures and algorithms through a practical approach. 
 
-This project is a starting point for a Flutter application.
+Whether you're gearing up for interviews or aiming to up your programming game, the app will equip you with skills that aren't just theoretical but practical and applicable (with code samples).
 
-A few resources to get you started if this is your first Flutter project:
+## Demo
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+https://github.com/adityathakurxd/maangengineer-app/assets/53579386/593c267e-538c-47d5-905a-f332d7fac382
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
